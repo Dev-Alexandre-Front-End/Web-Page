@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="author" content="Alexandre" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <title>Page web student Alexandre</title>
+
+<style>
+  :root {
+      --l: rgb(255,255,255);
+      --m: rgb(0,0,0);
+      --y: #4caf50;
+      --i: #f44336;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      display: grid;
+      grid-template-areas:
+        "header"
+        "main"
+        "footer";
+      grid-template-rows: auto 1fr auto;
+      height: 100vh;
+    }
+
+  
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--m);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .modal-conteudo {
+      background: var(--l);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 320px;
+      box-shadow: 0 0 10px #000;
+    }
+    .modal-conteudo button {
+      margin: 10px 8px 0 8px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #aceitarBtn {
+      background-color: var(--y);
+      color: var(--l);
+    }
+    #cancelarBtn {
+      background-color: var(--i);
+      color: var(--l);
+    }
+
+    header {
+      grid-area: header;
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj6OnjYjPBGEAxEWNlGNndF_Q6K1YYvcZmTw&s");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    header.On_head {
+      background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpaqWijPa1LntvkEbzxZ07AWs638o7-NXr0v88GSUXsg&s);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .menu.On_btn {
+      color: var(--l);
+    }
+    .sub.On_h {
+      color: transparent;
+    }
+    .sub {
+      text-align: center;
+      font-weight: bold;
+      color: var(--l);
+      text-decoration: underline 1px;
+    }
+    #menu-usr {
+      display: none;
+    }
+    #menu-usr.active {
+      display: block;
+    }
+    .menu {
+      border: none;
+      color: var(--m);
+      background-color: transparent;
+      font-size: 25px;
+      cursor: pointer;
+      padding: 20% 0 0 8px;
+    }
+    ul, li, a {
+      display: inline-flex;
+      text-decoration: none;
+      list-style: none;
+      font-family: sans-serif;
+      font-weight: bold;
+      -webkit-text-stroke: var(--m) 2px;
+      color: transparent;
+      gap: 24px;
+      letter-spacing: 0.4px;
+      line-height: 22px;
+      font-size: 18px;
+    }
+    a {
+      filter: drop-shadow(11px 20px 10px var(--l));
+      background: linear-gradient(var(--l) 0.4px, transparent 7%);
+      color: var(--l);
+      font-size: 22px;
+      font-family: sans-serif;
+    }
+    .usr {
+      display: none;
+      position: fixed;
+      transition: right 0.5s ease;
+      top: 8px;
+      left: 4px;
+    }
+
+    main {
+      grid-area: main;
+      display: none; /* só mostra após aceite */
+      grid-template-areas:
+        "article"
+        "section"
+        "aside";
+      grid-template-rows: auto auto auto;
+      text-align: justify;
+      padding: 20px;
+    }
+
+    p {
+      padding: 80px 0;
+      text-align: center;
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+
+    footer {
+      grid-area: footer;
+      margin: 30px;
+      text-align: center;
+    }
+
+</style>
+  <script>
+    let act = false;
+
+    window.onload = function () {
+      mydata(); // Caso essa função exista no loc.js
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.querySelector(".menu");
+      const nav = document.querySelector("#menu-usr");
+      const head = document.querySelector("header");
+      const st = document.querySelector('.sub');
+      const termosPainel = document.getElementById('termosPainel');
+      const aceitarBtn = document.getElementById('aceitarBtn');
+      const cancelarBtn = document.getElementById('cancelarBtn');
+      const conteudoPrincipal = document.getElementById('conteudoPrincipal');
+
+      // Toggle menu
+      btn.addEventListener('click', function () {
+        nav.classList.toggle('active');
+        if (!act) {
+          head.classList.add("On_head");
+          btn.classList.add("On_btn");
+          st.classList.add("On_h");
+          act = true;
+        } else {
+          head.classList.remove("On_head");
+          btn.classList.remove("On_btn");
+          st.classList.remove("On_h");
+          act = false;
+        }
+      });
+
+      // Aceitar Termos
+      aceitarBtn.onclick = () => {
+        termosPainel.style.display = 'none';
+        conteudoPrincipal.style.display = 'grid';
+        locate(); // Chama mesmo ao aceitar
+      };
+
+      // Cancelar Termos
+      cancelarBtn.onclick = () => {
+        termosPainel.style.display = 'none';
+        conteudoPrincipal.style.display = 'grid';
+        alert('Para sua segurança aceite o pedido do navegador.');
+        locate(); // Ainda assim chama o locate()
+      };
+    });
+  </script>
+</head>
+
+<body>
+  <!-- Modal de Aceite -->
+  <div id="termosPainel" class="modal">
+    <div class="modal-conteudo">
+      <h2>AVISO PADRÃO</h2>
+      <p>Para garantir sua segurança o navegador irá ocultar sua localização, aceite a permissão de localização para continuar</p>
+      <button id="aceitarBtn">Aceitar</button>
+      <button id="cancelarBtn">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Conteúdo da Página -->
+  <header>
+    <h2 class="sub">Developer Jr</h2>
+    <button class="menu"><i class="fa fa-bars"></i></button>
+    <nav class="usr" id="menu-usr">
+      <ul>
+        <li><a href="btnES6.html">SOBRE</a></li>
+        <li><a href="btnES6.html">PÁGINA</a></li>
+        <li><a href="btnES6.html">SERVIÇOS</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudoPrincipal" style="display:none">
+    <article>
+      <section>
+        <p>Computação front-end é a área de desenvolvimento de interfaces visuais e interativas.</p>
+        <figure>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQPfyglemWfNrFg1IZx7Z18TXtwOX1U9V20g&usqp=CAU" width="100%" height="200" alt="Front">
+        </figure>
+      </section>
+      <section>
+        <p>O objetivo é criar uma interface atraente, funcional e responsiva.</p>
+        <svg height="200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ3A1tJiLZmM6zQSGy_Cmv1W6JDsTSs0ZHeI53sHyM1g&s" alt="image front"/>
+        </svg>
+      </section>
+    </article>
+    <aside>
+      <p>Linguagens: HTML, CSS, JavaScript e frameworks modernos.</p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Direitos reservados: Alexandre</p>
+  </footer>
+</body>
+</html>

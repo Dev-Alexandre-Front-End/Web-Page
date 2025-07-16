@@ -29,6 +29,7 @@
         "footer";
       grid-template-rows: auto 1fr auto;
       height: 100vh;
+      width: 100%;
     }
 
   
@@ -157,7 +158,60 @@
       margin: 30px;
       text-align: center;
     }
-
+    @media (min-width: 1800px) {
+  body {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  header {
+    height: 300px;
+    background-size: cover;
+  }
+  
+  .menu {
+    font-size: 48px;
+    padding: 40px 20px;
+  }
+  
+  .sub {
+    font-size: 36px;
+    padding: 20px;
+  }
+  
+  nav.usr ul li a {
+    font-size: 26px;
+    padding: 10px 20px;
+  }
+  
+  main {
+    grid-template-rows: auto auto auto;
+    padding: 40px 80px;
+  }
+  
+  main p {
+    font-size: 22px;
+    padding: 60px 0;
+    line-height: 1.8;
+  }
+  
+  footer p {
+    font-size: 20px;
+    margin-top: 60px;
+  }
+  
+  .modal-conteudo {
+    max-width: 600px;
+    padding: 40px;
+    font-size: 20px;
+  }
+  
+  .modal-conteudo button {
+    font-size: 18px;
+    padding: 12px 24px;
+  }
+}
 </style>
   <script>
     let act = false;
@@ -244,8 +298,8 @@
       </section>
       <section>
         <p>O objetivo é criar uma interface atraente, funcional e responsiva.</p>
-        <svg height="200" width="100%" xmlns="http://www.w3.org/2000/svg">
-          <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ3A1tJiLZmM6zQSGy_Cmv1W6JDsTSs0ZHeI53sHyM1g&s" alt="image front"/>
+        <svg height="250" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ3A1tJiLZmM6zQSGy_Cmv1W6JDsTSs0ZHeI53sHyM1g&s" alt="image front" width="100%"/>
         </svg>
       </section>
     </article>
